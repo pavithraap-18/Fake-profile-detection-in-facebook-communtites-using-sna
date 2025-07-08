@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fake Account Detector</title>
+</head>
+<body>
+    <h2>Upload Edge List CSV</h2>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv" required>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if suspicious %}
+        <h3>Suspicious Users</h3>
+        <p>Total Users in Network: {{ total }}</p>
+        <ul>
+            {% for user in suspicious %}
+                <li>{{ user }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Graph Visualization</h3>
+        <img src="{{ url_for('static', filename=graph) }}" alt="Graph">
+    {% endif %}
+</body>
+</html>
